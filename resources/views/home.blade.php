@@ -1,37 +1,57 @@
 @extends('layouts.app')
-@section('title', 'Library Dashboard')
-@section('page-title', 'Library Dashboard Overview')
+
+@section('title', 'Enjdny Dashboard') 
+@section('page-title', 'Enjdny Dashboard Overview')
+
 @section('content')
 <div class="welcome-container">
-    <h1>Welcome to the Library Dashboard!</h1>
-    <p>Your go-to place for all things books and authors.</p>
+
+    @auth
+        <h3>مرحبًا بك، {{ Auth::user()->name }}! 🎉</h3>
+        
+        @if(Auth::user()->image)
+        <img src="{{ Storage::url(Auth::user()->image) }}" alt="User Image">
+        @endif
+
+        <p>Login successful</p>
+    @endauth
+
+    <p>Welcome to Enjdny for multiple home services</p>
+
 </div>
 
 <style>
     .welcome-container {
-        background-color: #3777bb; /* نفس اللون الأزرق للـ sidebar */
-        color: black; /* اللون الأسود للنص */
+        background-color: #3777bb; 
+        color: black; 
         padding: 50px 20px;
         text-align: center;
         border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* إضافة ظل للمستطيل */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
         position: absolute;
-        bottom: 50%; /* يجعل المستطيل يظهر في منتصف الصفحة تقريبًا */
-        transform: translateY(50%); /* ينقل المستطيل إلى المنتصف من أسفل */
-        width: 80%; /* عرض المستطيل */
-        max-width: 600px; /* الحد الأقصى للعرض */
-        animation: slideUp 1s ease-out; /* إضافة حركة انزلاق للمستطيل */
-        margin-left: 25%; /* إبعاد المستطيل عن الـ sidebar */
+        bottom: 50%; 
+        transform: translateY(50%); 
+        width: 80%; 
+        max-width: 600px; 
+        animation: slideUp 1s ease-out; 
+        left: 50%;
+        transform: translate(-50%, 50%);
     }
 
-    /* تأثير حركة انزلاق للمستطيل */
+    img {
+        max-width: 150px;
+        border-radius: 50%;
+        margin-top: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
     @keyframes slideUp {
         0% {
-            transform: translateY(100%); /* يبدأ من أسفل الصفحة */
+            transform: translate(-50%, 100%); 
             opacity: 0;
         }
         100% {
-            transform: translateY(50%); /* يقف في منتصف الصفحة */
+            transform: translate(-50%, 50%); 
             opacity: 1;
         }
     }

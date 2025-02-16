@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Dashboard</title>
+    <title>Engdany Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa; /* لون الخلفية الأبيض الفاتح */
+            background-color: #f8f9fa; 
             font-family: Arial, sans-serif;
             height: 100vh;
             margin: 0;
@@ -16,7 +16,7 @@
             align-items: center;
         }
         .sidebar {
-            background-color: #416a7c; /* اللون الأزرق */
+            background-color: #3777bb; 
             height: 100vh;
             position: sticky;
             top: 0;
@@ -28,11 +28,11 @@
             color: white;
         }
         .sidebar .nav-item .nav-link:hover {
-            background-color: #4d5968; /* تأثير اللون عند المرور بالماوس */
+            background-color: #4d5968; 
             color: white;
         }
         .sidebar .nav-item .nav-link.active {
-            background-color: #546272; /* اللون الأزرق الأساسي عند تحديد العنصر */
+            background-color: #546272; 
             color: white;
         }
         .sidebar .nav-item a {
@@ -42,7 +42,7 @@
             margin-bottom: 10px;
         }
         .main-content {
-            background-color: white; /* خلفية المحتوى بيضاء */
+            background-color: white; 
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -56,23 +56,35 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar ثابت -->
+           
             <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
                 <div class="position-sticky">
-                    <h2> Library Dashboard</h2>
+                    <h2> Enjdany Dashboard</h2>
                     <ul class="nav flex-column">
+                        @auth
+                
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
+                       
+                        @endauth
+                        @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('books.index') }}">Books</a>
+                            <a class="nav-link" href="{{ route('auths.register') }}">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('authors.index') }}">Authors</a>
+                            <a class="nav-link" href="{{ route('auths.login') }}">login</a>
                         </li>
+                        @endguest   
+
+                        @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('students.index') }}">Students</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                            </form>
                         </li>
+                        @endauth
                     </ul>
                 </div>
             </nav>
