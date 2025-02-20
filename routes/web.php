@@ -1,23 +1,25 @@
 <?php
 
-use App\Http\Middleware\EnsureUserIsRegistered;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
-
-
-
-
+use App\Http\Controllers\ServiceRequestController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\AppointmentController;
 
 Route::get('/', function () {
-    return Auth::check() ? redirect()->route('auths.register') : redirect()->route('home');
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
+Route::prefix('test')->group(function () {
+    Route::get('/requests', [ServiceRequestController::class, 'index'])->name('test.requests.index');
+    Route::get('/requests/create', [ServiceRequestController::class, 'create'])->name('test.requests.create');
+    Route::post('/requests', [ServiceRequestController::class, 'store'])->name('test.requests.store');
+
+    Route::post('/offers/{request}', [OfferController::class, 'store'])->name('test.offers.store');
+
+    Route::get('/appointments/create/{offer}', [AppointmentController::class, 'create'])->name('test.appointments.create');
+    Route::post('/appointments', [AppointmentController::class, 'store'])->name('test.appointments.store');
 });
-Route::get('/home', [HomeController::class, 'index'])
-    ->middleware(\App\Http\Middleware\EnsureUserIsRegistered::class)
-    ->name('home');
-Route::get('/auths/register', [AuthController::class, 'register'])->name('auths.register');
-Route::post('/auths/register', [AuthController::class, 'handelregister'])->name('auths.handelregister');
-Route::get('/auths/login', [AuthController::class, 'login'])->name('auths.login');
-Route::post('/auths/login', [AuthController::class, 'handellogin'])->name('auths.handellogin');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

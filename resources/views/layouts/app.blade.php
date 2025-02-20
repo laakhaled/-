@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engdany Dashboard</title>
+    <title>Library Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
@@ -16,7 +16,7 @@
             align-items: center;
         }
         .sidebar {
-            background-color: #3777bb; 
+            background-color: #416a7c;
             height: 100vh;
             position: sticky;
             top: 0;
@@ -28,11 +28,11 @@
             color: white;
         }
         .sidebar .nav-item .nav-link:hover {
-            background-color: #4d5968; 
+            background-color: #4d5968; /* تأثير اللون عند المرور بالماوس */
             color: white;
         }
         .sidebar .nav-item .nav-link.active {
-            background-color: #546272; 
+            background-color: #546272; /* اللون الأزرق الأساسي عند تحديد العنصر */
             color: white;
         }
         .sidebar .nav-item a {
@@ -42,7 +42,7 @@
             margin-bottom: 10px;
         }
         .main-content {
-            background-color: white; 
+            background-color: white; /* خلفية المحتوى بيضاء */
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -56,35 +56,23 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-           
+            <!-- Sidebar ثابت -->
             <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
                 <div class="position-sticky">
-                    <h2> Enjdany Dashboard</h2>
+                    <h2> Anjedni Dashboard</h2>
                     <ul class="nav flex-column">
-                        @auth
-                
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
-                       
-                        @endauth
-                        @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('auths.register') }}">Register</a>
+                            <a class="nav-link" href="{{ route('test.requests.create') }}">Create Request</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('auths.login') }}">login</a>
+                            <a class="nav-link" href="{{ route('test.requests.store') }}">Requests</a>
+                        </li >
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="#">Logout</a> 
                         </li>
-                        @endguest   
-
-                        @auth
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
-                            </form>
-                        </li>
-                        @endauth
                     </ul>
                 </div>
             </nav>
