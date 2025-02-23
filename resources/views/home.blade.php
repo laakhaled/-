@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-@section('title', content: 'Library Dashboard')
-@section('page-title', 'Library Dashboard Overview')
+@extends('app')
 @section('content')
 <div class="welcome-container">
     <h1>Welcome to the Anjedny Dashboard!</h1>
