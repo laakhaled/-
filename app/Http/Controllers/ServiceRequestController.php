@@ -97,6 +97,12 @@ class ServiceRequestController extends Controller
         //
         $request = ServiceRequest::find($id);
         $request->delete();
-        return redirect()->route('requests.create')->with('success', 'Request deleted successfully!');
+        return redirect()->back();
+    }
+
+    public function admin()
+    {
+        $requests=ServiceRequest::all();
+        return View('requests.admin',compact('requests'));
     }
 }

@@ -19,6 +19,9 @@ Route::post('/login',[UserController::class,'handleLogin'])->name('login');
 Route::get('/logout',[UserController::class,'logout']);
 
 
+Route::get('/users',[UserController::class,'index']);
+Route::delete('users/delete/{id}',[UserController::class,'destroy']);
+
 Route::get('/home', function () {
     return view('home');
 })->name('home');
@@ -26,13 +29,17 @@ Route::get('/home', function () {
 
 
 
-
+Route::get('/allrequests', [ServiceRequestController::class, 'admin']);
 Route::get('/requests', [ServiceRequestController::class, 'index'])->name('requests.index');
 Route::get('/requests/create', [ServiceRequestController::class, 'create'])->name('requests.create');
 Route::post('/requests', [ServiceRequestController::class, 'store'])->name('requests.store');
 Route::delete('requests/delete/{id}',[ServiceRequestController::class,'destroy']);
 
+Route::get('/offers',[OfferController::class,'index']);
 Route::post('/offers/{request}', [OfferController::class, 'store'])->name('offers.store');
+Route::delete('offers/delete/{id}',[OfferController::class,'destroy']);
 
 Route::get('/appointments/create/{offer}', [AppointmentController::class, 'create'])->name('appointments.create');
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::get('/allappointments', [AppointmentController::class, 'index']);
+Route::delete('appointments/delete/{id}',[AppointmentController::class,'destroy']);

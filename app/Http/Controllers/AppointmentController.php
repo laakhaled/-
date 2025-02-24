@@ -13,6 +13,8 @@ class AppointmentController extends Controller
     public function index()
     {
         //
+        $appointments=Appointment::all();
+        return View('appointments.index',compact('appointments'));
     }
 
     /**
@@ -61,5 +63,8 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+        $appointment=Appointment::find($id);
+        $appointment->delete();
+        return redirect()->back();
     }
 }

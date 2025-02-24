@@ -1,3 +1,4 @@
+@auth
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,6 @@
         body {
             background-color: #f8f9fa; 
             font-family: Arial, sans-serif;
-            height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -80,6 +80,7 @@
     </style>
 </head>
 <body>
+    @if (Auth::user()->isadmin == 'no')
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
@@ -110,5 +111,52 @@
             </main>
         </div>
     </div>
+    @endif
+
+    @if (Auth::user()->isadmin == 'yes')
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-none d-md-block sidebar">
+                <div class="position-sticky">
+                    <img src="{{ asset('uploads/images/' . auth()->user()->image) }}" alt="User Avatar" class="user-avatar">
+                    <h5>Welcome {{ auth()->user()->name }}</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/allrequests">Service Requests</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/offers">Offers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/allappointments">Appointments</a>
+                        </li>
+
+                    </ul>
+                    <a href="/logout">
+                    <button class="logout-btn">Logout</button>
+                    </a>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="main-content">
+                    @yield('content')
+                </div>
+            </main>
+        </div>
+    </div>
+    @endif
 </body>
 </html>
+@endauth
+
+
+@guest
+    <img src="{{ asset('uploads/images/auth.jpg') }}" width=500 height="500">
+@endguest

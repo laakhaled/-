@@ -78,4 +78,16 @@ class UserController extends Controller
         Auth::logout();
         return View('welcome');
     }
+    public function index()
+    {
+        $users=User::all();
+        return View('user.index',compact('users'));
+    }
+
+    public function destroy($id)
+    {
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->back();
+    }
 }

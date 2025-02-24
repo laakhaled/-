@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
@@ -13,6 +14,8 @@ class OfferController extends Controller
     public function index()
     {
         //
+        $offers=Offer::all();
+        return View('offers.index',compact('offers'));
     }
 
     /**
@@ -29,7 +32,17 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $request->validate([
+            'message'=>'required|string',
+            'price'=>'numeric|required'
+        ]);
+            offer::create([
+                'message'=>$request['message'],
+                'price'=>$request['price'],
+                'service_request_id'=>$request['requestID'],
+                'provider_id'=>Auth::user()->id
+            ]);
+            return redirect()->route('requests.index');
     }
 
     /**
@@ -59,8 +72,11 @@ class OfferController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Offer $offer)
+    public function destroy($id)
     {
         //
+        $offer=Offer::find($id);
+        $offer->delete();
+        return redirect()->back();
     }
 }
