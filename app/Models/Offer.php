@@ -8,4 +8,9 @@ class Offer extends Model
 {
     //
     protected $fillable = ['message','price','service_request_id','provider_id'];
+
+    public function users()
+    {
+    return $this->belongsTo(User::class,'provider_id');
+    }
 }

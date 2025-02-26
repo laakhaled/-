@@ -14,7 +14,15 @@ class ServiceRequestController extends Controller
     public function index()
     {
         //
-        $requests = ServiceRequest::latest()->get(); 
+      //  $requests = ServiceRequest::whereDoesntHave('offers', function ($query) {
+        //    $query->where('provider_id', auth()->id());
+        //})->get();
+
+
+        $requests = ServiceRequest::whereDoesntHave('offers', function ($query) {
+            $query->where('provider_id', auth()->id());
+        })->with(['offers.users'])->get();
+        
          return view('requests.index', compact('requests'));
     }
 
@@ -68,9 +76,11 @@ class ServiceRequestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServiceRequest $serviceRequest)
+    public function show($id)
     {
         //
+        $request=ServiceRequest::find($id);
+        return View('requests.show',compact('request'));
     }
 
     /**

@@ -42,6 +42,12 @@ class User extends Authenticatable
         return $this->hasMany(ServiceRequest::class);
     }
 
+    public function Offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
+
 
     /**
      * Get the attributes that should be cast.

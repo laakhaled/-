@@ -51,7 +51,9 @@
                     <div class="card-body">
                         <p class="card-text">{{ $request->description }}</p>
                         @if ($request->image)
+                        <a href="/requests/show/{{ $request->id }}">
                             <img src="{{ asset('uploads/images/' . $request->image) }}" alt="Request Image" class="img-fluid" width="100" height="100">
+                        </a>
                         @endif
 
                         <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#deleteRequestModal{{ $request->id }}">
