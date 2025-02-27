@@ -78,4 +78,9 @@ class UserController extends Controller
         Auth::logout();
         return View('welcome');
     }
+    public function index()
+    {
+        $users=User::all();
+        return View('user.index',compact('users'));
+    }
 }

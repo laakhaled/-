@@ -41,7 +41,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(ServiceRequest::class);
     }
-
+    public function portfolioImages()
+    {
+        return $this->hasMany(PortfolioImage::class);
+    }
+    public function offers()
+    {
+        return $this->hasOne(Offer::class, 'provider_id');
+    }
 
     /**
      * Get the attributes that should be cast.

@@ -14,7 +14,7 @@
         <div class="container">
             <a class="navbar-brand" href="/home">Home</a>
             <div class="navbar-nav">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="/logout">Logout</a>
                 {{-- <a class="nav-link" href="{{ route('test.requests.create') }}">Create Request</a> --}}
             </div>
         </div>

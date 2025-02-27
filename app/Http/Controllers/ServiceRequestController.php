@@ -13,7 +13,7 @@ class ServiceRequestController extends Controller
      */
     public function index()
     {
-        //
+        
         $requests = ServiceRequest::latest()->get(); 
          return view('requests.index', compact('requests'));
     }
@@ -23,7 +23,9 @@ class ServiceRequestController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->role !== 'customer') {
+            return redirect()->route('requests.index')->with('error', 'ليس لديك صلاحية لإنشاء الطلبات.');
+        }
         $requests = Auth::user()->ServiceRequests()->latest()->get();       
         return view('requests.create',compact('requests'));
     }
@@ -33,7 +35,8 @@ class ServiceRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+       
         $request->validate([
             'description' => 'required|string'
         ]);
@@ -98,5 +101,11 @@ class ServiceRequestController extends Controller
         $request = ServiceRequest::find($id);
         $request->delete();
         return redirect()->route('requests.create')->with('success', 'Request deleted successfully!');
+    }
+
+    public function admin()
+    {
+        $requests=ServiceRequest::all();
+        return View('requests.admin',compact('requests'));
     }
 }
