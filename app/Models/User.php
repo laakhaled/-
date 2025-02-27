@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -38,18 +37,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // public function ServiceRequests()
-    // {
-    //     return $this->hasMany(ServiceRequest::class);
-    // }
-
-    public function serviceRequests() 
-{
-    return $this->hasMany(ServiceRequest::class);
-}
-
-    
-    
+    public function ServiceRequests()
+    {
+        return $this->hasMany(ServiceRequest::class);
+    }
 
 
     /**
@@ -64,5 +55,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
 }

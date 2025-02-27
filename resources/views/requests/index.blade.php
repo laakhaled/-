@@ -36,6 +36,7 @@
                     <form action="{{ route('offers.store', $request->id) }}" method="POST">
                         @csrf
                         <div class="input-group">
+                            <input name="requestID" type="hidden" value="{{ $request->id }}">
                             <input type="text" name="message" class="form-control" placeholder="Write your offer..." required>
                             <br>
                             <input type="number" name="price" class="form-control" placeholder="write place offer" required>

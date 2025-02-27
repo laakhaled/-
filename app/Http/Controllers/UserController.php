@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\File;
-
 class UserController extends Controller
 {
     //
@@ -80,43 +78,9 @@ class UserController extends Controller
         Auth::logout();
         return View('welcome');
     }
-    
-    public function edit()
+    public function index()
     {
-        return view('user.edit'); 
+        $users=User::all();
+        return View('user.index',compact('users'));
     }
-
-    public function update(Request $request)
-    {
-        $user = Auth::user();
-    
-        if (!$user) {
-            return redirect()->route('login')->withErrors(['error' => 'You need to log in first.']);
-        }
-    
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-    
-        $user->name = $request->name;
-    
-        if ($request->hasFile('image')) {
-            $oldImagePath = public_path('uploads/images/' . $user->image);
-            if ($user->image && file_exists($oldImagePath) && $user->image !== 'user.png') {
-                unlink($oldImagePath);
-            }
-    
-            $image = $request->file('image');
-            $filename = "user_" . time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/images'), $filename);
-    
-            $user->image = $filename;
-        }
-    
-        $user->save();
-        return redirect()->route('user.edit')->with('success', 'Profile updated successfully.');
-
-    }
-    
 }
