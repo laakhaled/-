@@ -13,6 +13,8 @@ class AppointmentController extends Controller
     public function index()
     {
         //
+        $appointments=Appointment::all();
+        return View('appointments.index',compact('appointments'));
     }
 
     /**

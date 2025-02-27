@@ -24,7 +24,7 @@ class ServiceRequestController extends Controller
     public function create()
     {
         //
-        $requests = Auth::user()->serviceRequests()->latest()->get(); 
+        $requests = Auth::user()->ServiceRequests()->latest()->get();       
         return view('requests.create',compact('requests'));
     }
 
@@ -58,6 +58,7 @@ class ServiceRequestController extends Controller
             'description' => $request->description,
             'image' => $image,
             'status' => 'pending',
+            'type'=>$request->type
         ]);
 
         return redirect()->route('requests.create')->with('success', 'Request created successfully!');
@@ -97,5 +98,11 @@ class ServiceRequestController extends Controller
         $request = ServiceRequest::find($id);
         $request->delete();
         return redirect()->route('requests.create')->with('success', 'Request deleted successfully!');
+    }
+
+    public function admin()
+    {
+        $requests=ServiceRequest::all();
+        return View('requests.admin',compact('requests'));
     }
 }
