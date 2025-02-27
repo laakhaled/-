@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\TimeController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -44,3 +45,9 @@ Route::get('/appointments/create/{offer}', [AppointmentController::class, 'creat
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 Route::get('/allappointments', [AppointmentController::class, 'index']);
 Route::delete('appointments/delete/{id}',[AppointmentController::class,'destroy']);
+
+
+Route::get('/times/create', [TimeController::class, 'create'])->name('times.create');
+Route::post('/times', [TimeController::class, 'store'])->name('times.store');
+Route::delete('times/delete/{id}',[TimeController::class,'destroy']);
+

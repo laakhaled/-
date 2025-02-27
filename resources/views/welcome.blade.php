@@ -1,3 +1,7 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,50 +12,24 @@
     <!-- render all elemnts normaly -->
    
     <link rel="stylesheet" href="">
-    <!-- google font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Welcome</title>
-    
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
     <!-- fontawesome -->
 <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-
-
+<link rel="stylesheet" href="{{ asset('css/navwe.css') }}">
 <!-- Web Fonts Example -->
 <link rel="stylesheet" href="{{ asset('webfonts/fontawesome-webfont.woff2') }}">
-
 </head>
 <body>
-    <!-- header -->
-    <div class="header">
-        <div class="container">
-            <img class="logo" src="images/photo_2025-02-22_16-55-28-removebg-preview.png" alt="" >
-            <div class="links">
-                <span class="icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portofolio">Portofolio</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="/signup" >Register</a></li>
-                    <li><a href="/login" >Login</a></li>
-                    
-                    
-                </ul>
-            </div>
-        </div>
-
-    </div>
+    @include('user.navwe')
     <!-- landing -->
      <div class="landing">
         <div class="intro-txt">

@@ -27,13 +27,6 @@
                     <strong>Offers:</strong>
                     <ul class="list-group offers-list-{{ $request->id }}">
                         @foreach($request->offers as $offer)
-                        <li class="list-group-item">
-                            @if($offer->users)
-                                <strong>Provider:</strong> {{ $offer->users->name }}
-                            @else
-                                <strong>Provider:</strong> N/A
-                            @endif
-                        </li>
                             <li class="list-group-item">{{ $offer->message }}</li>
                         @endforeach
                     </ul>

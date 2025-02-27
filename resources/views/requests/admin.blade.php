@@ -58,11 +58,7 @@
             <td>{{ $request->type }}</td>
             
             <td>
-              <form action="/requests/delete/{{  $request->id  }}" method="POST">
-                @csrf
-                @method('DELETE')
-               <button>Delete</button>
-              </form>
+               <a href="/requests/delete/{{  $request->id  }}"><button>Delete</button></a>
             
     </tr>
       @endforeach

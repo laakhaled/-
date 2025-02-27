@@ -3,87 +3,108 @@
 @section('title', 'Create Service Request')
 
 @section('content')
-    <div class="container">
-        <h2 class="my-4">Service Requests</h2>
-        
-        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createRequestModal">
-            Create Service Request
+<div class="container">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-5 py-3 border-bottom">
+        <h1 class="display-6 fw-bold text-primary">Service Requests</h1>
+        <button type="button" class="mb-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRequestModal">
+            <i class="fas fa-plus-circle me-2"></i> New Request
         </button>
+    </div>
 
-        <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createRequestModalLabel">Create a New Service Request</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('requests.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="type" class="form-label">Request Type</label>
-                                <select name="type" class="form-select">
-                                    <option disabled selected>Select type of request</option>
-                                    <option value="Electrecity">Electrecity</option>
-                                    <option value="carpentry">carpentry</option>
-                                    <option value="Plumbing">Plumbing</option>
-                                </select>
+    <!-- Create Request Modal -->
+    <div class="modal fade" id="createRequestModal" tabindex="-1" aria-labelledby="createRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Create New Request</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('requests.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Request Type</label>
+                            <select name="type" class="form-select" required>
+                                <option value="" disabled selected>Select service type</option>
+                                <option value="Electricity">Electrical</option>
+                                <option value="Carpentry">Carpentry</option>
+                                <option value="Plumbing">Plumbing</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="3" name="description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" class="form-control" name="image" accept="image/*">
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requests List -->
+    <div class="row">
+        @foreach ($requests as $request)
+        <div class="col-12 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-start gap-3">
+                        @if ($request->image)
+                        <div class="col-md-3">
+                            <a href="/requests/show/{{ $request->id }}">
+                            <img src="{{ asset('uploads/images/' . $request->image) }}" class="img-fluid rounded" alt="Request Image">
+                            </a>
+                        </div>
+                        @endif
+                        <div class="col">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-primary">{{ $request->type }}</span>
+                                <small class="text-muted">{{ $request->created_at->diffForHumans() }}</small>
                             </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Request Description</label>
-                                <textarea class="form-control" id="description" name="description" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="image" class="form-label">Upload Image</label>
-                                <input type="file" class="form-control" id="image" name="image">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Post Request</button>
-                        </form>
+                            <p class="mb-3">{{ $request->description }}</p>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRequestModal{{ $request->id }}">
+                                <i class="fas fa-trash me-1"></i> Delete
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-4">
-            <h3>Your Service Requests</h3>
-            @foreach ($requests as $request)
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p class="card-text">{{ $request->description }}</p>
-                        @if ($request->image)
-                        <a href="/requests/show/{{ $request->id }}">
-                            <img src="{{ asset('uploads/images/' . $request->image) }}" alt="Request Image" class="img-fluid" width="100" height="100">
-                        </a>
-                        @endif
-
-                        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#deleteRequestModal{{ $request->id }}">
-                            Delete
-                        </button>
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteRequestModal{{ $request->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this request?</p>
+                        <form action="/requests/delete/{{ $request->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="d-flex gap-2 justify-content-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-            
-                <div class="modal fade" id="deleteRequestModal{{ $request->id }}" tabindex="-1" aria-labelledby="deleteRequestModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteRequestModalLabel">Are you sure to delete this post?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="/requests/delete/{{ $request->id }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            </div>
         </div>
+        @endforeach
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 @endsection

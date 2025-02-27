@@ -36,7 +36,7 @@
                         <li class="list-group-item">{{ $offer->message }}</li>
                         <li class="list-group-item"><strong>Price:</strong> {{ $offer->price }} L.E</li>
 
-                        <form action="" method="POST">
+                        <form action="">
                             @csrf
                             <button type="submit" class="btn btn-success">Accept Offer</button>
                         </form>
