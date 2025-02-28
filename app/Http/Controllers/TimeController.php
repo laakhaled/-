@@ -31,14 +31,12 @@ class TimeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
+            'datetime' => 'required|date|after:today',
         ]);
     
         Time::create([
             'provider_id' => Auth::user()->id,
-            'date' => $request->date,
-            'time' => $request->time,
+            'datetime' => $request->datetime,
         ]);
     
         return redirect()->route('times.create')->with('success', 'Time slot created successfully!');

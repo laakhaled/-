@@ -41,8 +41,7 @@
     <thead class="table-dark">
       <tr>
         <th>ID</th>
-        <th>Date</th>
-        <th>Time</th>
+        <th>Date & Time</th>
         <th>Delete</th>
       </tr>
       </thead>
@@ -50,8 +49,7 @@
       @foreach($appointments as $appointment)
         <tr>
             <td>{{ $appointment->id }}</td>
-            <td>{{ $appointment->date }}</td>
-            <td>{{ $appointment->time }}</td>
+            <td>{{ $appointment->datetime }}</td>
             <td>
               <form action="/appointments/delete/{{  $appointment->id  }}" method="POST">
                 @csrf

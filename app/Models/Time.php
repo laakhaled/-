@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Time extends Model
 {
     //
-   protected $fillable= ['date','time','provider_id'];
+   protected $fillable= ['datetime','provider_id'];
    public function users()
    {
    return $this->belongsTo(User::class,'provider_id');

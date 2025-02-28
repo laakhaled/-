@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -20,9 +21,11 @@ class AppointmentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         //
+        $offer=Offer::find($id);
+        return View("appointments.create",compact("offer"));
     }
 
     /**
@@ -31,6 +34,12 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         //
+        $datetime = $request->appointment;
+        Appointment::create([
+            'offer_id'=>$request->offer_id,
+            'datetime'=>$datetime
+        ]);
+        return View('home');
     }
 
     /**

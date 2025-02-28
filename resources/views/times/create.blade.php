@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container">
-    <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-5 py-3 border-bottom">
         <h1 class="display-6 fw-bold text-primary">Create Time Slot</h1>
         <button type="button" class="mb-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTimeSlotModal">
@@ -12,7 +11,6 @@
         </button>
     </div>
 
-    <!-- Create Time Slot Modal -->
     <div class="modal fade" id="createTimeSlotModal" tabindex="-1" aria-labelledby="createTimeSlotModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -25,14 +23,8 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Date</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input type="datetime-local" class="form-control" name="datetime" required>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Time</label>
-                            <input type="time" class="form-control" name="time" required>
-                        </div>
-
                         <div class="d-grid gap-2 mt-4">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fas fa-calendar-plus me-2"></i> Add Time Slot
@@ -44,7 +36,6 @@
         </div>
     </div>
 
-    <!-- Time Slots List -->
     <div class="row mt-5">
         @foreach ($times as $time)
         <div class="col-12 mb-4">
@@ -53,7 +44,7 @@
                     <div class="d-flex align-items-start gap-3">
                         <div class="col">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-primary">{{ $time->date }} - {{ $time->time }}</span>
+                                <span class="badge bg-primary">{{ $time->datetime }}</span>
                                 <small class="text-muted">{{ $time->created_at->diffForHumans() }}</small>
                             </div>
                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTimeSlotModal{{ $time->id }}">
@@ -65,7 +56,6 @@
             </div>
         </div>
 
-        <!-- Delete Confirmation Modal -->
         <div class="modal fade" id="deleteTimeSlotModal{{ $time->id }}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -88,6 +78,7 @@
             </div>
         </div>
         @endforeach
+        <x-error/>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
