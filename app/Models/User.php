@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function Offers()
     {
-        return $this->hasMany(Offer::class);
+        return $this->hasMany(Offer::class,'provider_id');
     }
 
     public function times()

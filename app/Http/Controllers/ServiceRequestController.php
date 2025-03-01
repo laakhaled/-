@@ -21,7 +21,10 @@ class ServiceRequestController extends Controller
 
         $requests = ServiceRequest::whereDoesntHave('offers', function ($query) {
             $query->where('provider_id', auth()->id());
-        })->with(['offers.users'])->get();
+        })
+        ->where('status', 'pending')
+        ->with(['offers.users'])
+        ->get();
         
          return view('requests.index', compact('requests'));
     }
@@ -32,7 +35,7 @@ class ServiceRequestController extends Controller
     public function create()
     {
         //
-        $requests = Auth::user()->ServiceRequests()->latest()->get();       
+        $requests = Auth::user()->ServiceRequests()->where('status', 'pending')->latest()->get();     
         return view('requests.create',compact('requests'));
     }
 
@@ -114,5 +117,16 @@ class ServiceRequestController extends Controller
     {
         $requests=ServiceRequest::all();
         return View('requests.admin',compact('requests'));
+    }
+    public function oldRequests()
+    {
+        $requests = Auth::user()->ServiceRequests()->whereIn('status', ['accepted', 'completed'])->latest()->get();
+        return View('requests.oldRequests',compact('requests'));
+    }
+
+    public function AcceptedOffers()
+    {
+        $offers = Auth::user()->Offers()->where('status', 'accepted')->latest()->with('ServiceRequests')->get();
+        return View('requests.AcceptedOffers',compact('offers'));
     }
 }

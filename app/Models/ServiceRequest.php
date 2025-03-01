@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceRequest extends Model
 {
     //
-    protected $fillable = ['user_id', 'image','status','description','type'];
+    protected $fillable = ['user_id', 'image','status','description','type','status'];
     public function offers()
 {
     return $this->hasMany(Offer::class);

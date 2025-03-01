@@ -184,12 +184,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home </a>
                         </li>
+                        @if (Auth::user()->role=='customer')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('requests.create') }}">Create Request</a>
+                            <a class="nav-link" href="{{ route('requests.create') }}">Requests</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->role=='serviceProvider')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('requests.store') }}">Requests</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/times/create">Times</a>
+                        </li>
+                        @endif
                     </ul>
                     <a href="/logout">
                     <button class="logout-btn">Logout</button>
@@ -219,16 +226,30 @@
                                             We hope you enjoy using our services
                                             <i class="fas fa-quote-right ms-2"></i>
                                         </h5>
+                                        @if (Auth::user()->role=='customer')
                                         <div class="quick-actions">
                                             <a href="{{ route('requests.create') }}" 
                                                class="btn btn-success me-3">
                                                <i class="fas fa-plus-circle me-2"></i>Create New Request
                                             </a>
-                                            <a href="{{ route('requests.store') }}" 
+                                            <a href="/requests/old"
                                                class="btn btn-outline-primary">
                                                <i class="fas fa-history me-2"></i>View Previous Requests
                                             </a>
                                         </div>
+                                        @endif
+                                        @if (Auth::user()->role=='serviceProvider')
+                                        <div class="quick-actions">
+                                            <a href="{{ route('requests.store') }}" 
+                                               class="btn btn-success me-3">
+                                               <i class="fas fa-plus-circle me-2"></i>Create New Offers
+                                            </a>
+                                            <a href="offers/accepted"
+                                               class="btn btn-outline-primary">
+                                               <i class="fas fa-history me-2"></i>View accepted offers
+                                            </a>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

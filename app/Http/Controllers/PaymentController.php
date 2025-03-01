@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
+use App\Models\Payment;
 use App\Models\Offer;
-use App\Models\ServiceRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class AppointmentController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +15,14 @@ class AppointmentController extends Controller
     public function index()
     {
         //
-        $appointments=Appointment::all();
-        return View('appointments.index',compact('appointments'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create()
     {
         //
-        $offer=Offer::find($id);
-        return View("appointments.create",compact("offer"));
     }
 
     /**
@@ -35,19 +31,31 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         //
-        $datetime = $request->appointment;
-        Appointment::create([
-            'offer_id'=>$request->offer_id,
-            'datetime'=>$datetime
+        $request->validate([
+            'visanumber'=>"required|digits:16",
+            'CVV'=>"required|digits:3"
         ]);
+        Payment::create([
+            'user_id'=>Auth::user()->id,
+            'service_request_id'=>$request->service_request_id,
+            'offer_id'=>$request->offer_id,
+            'price'=>$request->price,
+            'visanumber'=>$request->visanumber,
+            'CVV'=>$request->CVV
+        ]);
+
         $offer=Offer::find($request->offer_id);
-        return View('payments.create',compact("offer"));
+        $offer->status='accepted';
+        $offer->save();
+        $offer->ServiceRequests->update(['status' => 'accepted']);
+        $offer->save();
+        return View("home");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Appointment $appointment)
+    public function show(Payment $payment)
     {
         //
     }
@@ -55,7 +63,7 @@ class AppointmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Appointment $appointment)
+    public function edit(Payment $payment)
     {
         //
     }
@@ -63,7 +71,7 @@ class AppointmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(Request $request, Payment $payment)
     {
         //
     }
@@ -71,11 +79,8 @@ class AppointmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(Payment $payment)
     {
         //
-        $appointment=Appointment::find($id);
-        $appointment->delete();
-        return redirect()->back();
     }
 }

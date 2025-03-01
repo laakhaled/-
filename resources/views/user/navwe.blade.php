@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <img class="logo" src="images/logo1.png" alt="">
+    <img class="logo" src="{{ asset('uploads/images/logo1.jpeg') }}" alt="" width="100" height="60">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">

@@ -6,6 +6,7 @@ use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\TimeController;
+use App\Http\Controllers\PaymentController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,6 +37,8 @@ Route::get('/requests/create', [ServiceRequestController::class, 'create'])->nam
 Route::post('/requests', [ServiceRequestController::class, 'store'])->name('requests.store');
 Route::delete('requests/delete/{id}',[ServiceRequestController::class,'destroy']);
 Route::get('requests/show/{id}',[ServiceRequestController::class,'show']);
+Route::get('requests/old',[ServiceRequestController::class,'oldRequests']);
+Route::get('offers/accepted',[ServiceRequestController::class,'AcceptedOffers']);
 
 Route::get('/offers',[OfferController::class,'index']);
 Route::post('/offers/{request}', [OfferController::class, 'store'])->name('offers.store');
@@ -51,3 +54,5 @@ Route::get('/times/create', [TimeController::class, 'create'])->name('times.crea
 Route::post('/times', [TimeController::class, 'store'])->name('times.store');
 Route::delete('times/delete/{id}',[TimeController::class,'destroy']);
 
+Route::get('/payment/create/{offer}',[PaymentController::class,'create']);
+Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
