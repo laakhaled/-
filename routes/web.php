@@ -54,5 +54,5 @@ Route::get('/times/create', [TimeController::class, 'create'])->name('times.crea
 Route::post('/times', [TimeController::class, 'store'])->name('times.store');
 Route::delete('times/delete/{id}',[TimeController::class,'destroy']);
 
-Route::get('/payment/create/{offer}',[PaymentController::class,'create']);
+Route::get('/payments/create/{offer}', [PaymentController::class, 'create'])->name('payments.create');
 Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');

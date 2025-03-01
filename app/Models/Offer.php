@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     //
-    protected $fillable = ['message','price','service_request_id','provider_id','status'];
+    protected $fillable = ['message','price','service_request_id','provider_id','status','time_id'];
 
     public function users()
     {
@@ -18,4 +18,10 @@ class Offer extends Model
     {
     return $this->belongsTo(ServiceRequest::class,'service_request_id');
     }
+    public function time()
+    {
+    return $this->belongsTo(Time::class);
+    }
+
+
 }

@@ -20,9 +20,11 @@ class PaymentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         //
+        $offer=Offer::find($id);
+        return View('payments.create',compact('offer'));
     }
 
     /**
@@ -48,6 +50,8 @@ class PaymentController extends Controller
         $offer->status='accepted';
         $offer->save();
         $offer->ServiceRequests->update(['status' => 'accepted']);
+        $offer->save();
+        $offer->time->delete();
         $offer->save();
         return View("home");
     }

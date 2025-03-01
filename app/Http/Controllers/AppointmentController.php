@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Offer;
+use App\Models\Time;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,11 @@ class AppointmentController extends Controller
             'offer_id'=>$request->offer_id,
             'datetime'=>$datetime
         ]);
+        $time = Time::where('datetime', $datetime)->first();
         $offer=Offer::find($request->offer_id);
-        return View('payments.create',compact("offer"));
+        $offer->time_id=$time->id;
+        $offer->save();
+        return redirect()->route('payments.create', ['offer' => $offer->id]);
     }
 
     /**
