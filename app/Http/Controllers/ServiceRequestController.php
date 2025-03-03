@@ -25,7 +25,9 @@ class ServiceRequestController extends Controller
         ->where('status', 'pending')
         ->with(['offers.users'])
         ->get();
-        
+        $requests->each(function ($request) {
+            $request->average_price = $request->offers->avg('price');
+        });
          return view('requests.index', compact('requests'));
     }
 

@@ -24,6 +24,7 @@
                 </div>
 
                 <div class="mt-3">
+                    <strong>Average prices of offers: <p class="fw-bold text-primary">{{ $request->average_price ?? 'No offers' }}</p></strong>
                     <strong>Offers:</strong>
                     <ul class="list-group offers-list-{{ $request->id }}">
                         @foreach($request->offers as $offer)
