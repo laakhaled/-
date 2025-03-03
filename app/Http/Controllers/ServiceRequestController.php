@@ -21,13 +21,8 @@ class ServiceRequestController extends Controller
 
         $requests = ServiceRequest::whereDoesntHave('offers', function ($query) {
             $query->where('provider_id', auth()->id());
-        })
-        ->where('status', 'pending')
-        ->with(['offers.users'])
-        ->get();
-        $requests->each(function ($request) {
-            $request->average_price = $request->offers->avg('price');
-        });
+        })->with(['offers.users'])->get();
+        
          return view('requests.index', compact('requests'));
     }
 

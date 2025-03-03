@@ -36,7 +36,12 @@
                         <li class="list-group-item">{{ $offer->message }}</li>
                         <li class="list-group-item"><strong>Price:</strong> {{ $offer->price }} L.E</li>
 
+<<<<<<< HEAD
                         <form action="/appointments/create/{{ $offer->id }}" method="GET">
+=======
+                        <form action="" method="POST">
+                            @csrf
+>>>>>>> 0ec4887 (One offer per service provider (show posts to service provider which not offered by this provider) and show the post details for the user once the user clicks on image (Image,type,description,all offers and allow to accept specific offer)
                             <button type="submit" class="btn btn-success">Accept Offer</button>
                         </form>
                     @endforeach

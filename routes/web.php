@@ -37,8 +37,6 @@ Route::get('/requests/create', [ServiceRequestController::class, 'create'])->nam
 Route::post('/requests', [ServiceRequestController::class, 'store'])->name('requests.store');
 Route::delete('requests/delete/{id}',[ServiceRequestController::class,'destroy']);
 Route::get('requests/show/{id}',[ServiceRequestController::class,'show']);
-Route::get('requests/old',[ServiceRequestController::class,'oldRequests']);
-Route::get('offers/accepted',[ServiceRequestController::class,'AcceptedOffers']);
 
 Route::get('/offers',[OfferController::class,'index']);
 Route::post('/offers/{request}', [OfferController::class, 'store'])->name('offers.store');

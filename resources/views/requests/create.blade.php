@@ -80,6 +80,7 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <!-- Delete Confirmation Modal -->
         <div class="modal fade" id="deleteRequestModal{{ $request->id }}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -98,6 +99,23 @@
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </div>
                         </form>
+=======
+        <div class="mt-4">
+            <h3>Your Service Requests</h3>
+            @foreach ($requests as $request)
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p class="card-text">{{ $request->description }}</p>
+                        @if ($request->image)
+                        <a href="/requests/show/{{ $request->id }}">
+                            <img src="{{ asset('uploads/images/' . $request->image) }}" alt="Request Image" class="img-fluid" width="100" height="100">
+                        </a>
+                        @endif
+
+                        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#deleteRequestModal{{ $request->id }}">
+                            Delete
+                        </button>
+>>>>>>> 0ec4887 (One offer per service provider (show posts to service provider which not offered by this provider) and show the post details for the user once the user clicks on image (Image,type,description,all offers and allow to accept specific offer)
                     </div>
                 </div>
             </div>
