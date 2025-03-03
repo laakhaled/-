@@ -1,4 +1,5 @@
 @auth
+<<<<<<< HEAD
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -8,6 +9,11 @@
     <html lang="ar">
     <head>
     <title>Library Dashboard</title>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,9 +22,15 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/navreq.css') }}">
     <style>
+<<<<<<< HEAD
         /* تنسيقات عامة */
         body, html {
             height: 100%;
+=======
+        body {
+            background-color: #f8f9fa; 
+            font-family: Arial, sans-serif;
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
             margin: 0;
             font-family: 'Arial', sans-serif;
             background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),

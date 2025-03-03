@@ -58,7 +58,15 @@
             <td>{{ $request->type }}</td>
             
             <td>
+<<<<<<< HEAD
                <a href="/requests/delete/{{  $request->id  }}"><button>Delete</button></a>
+=======
+              <form action="/requests/delete/{{  $request->id  }}" method="POST">
+                @csrf
+                @method('DELETE')
+               <button>Delete</button>
+              </form>
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
             
     </tr>
       @endforeach

@@ -177,6 +177,7 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 @include('user.navreq')
 <div class="container my-0 pt-0">
     @yield('content')
@@ -185,5 +186,27 @@
     © 2025 Anjedni. All rights reserved.
 </footer>
 <script src="{{ asset('js/script.js') }}"></script>
+=======
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="color: #416A7C">
+        <div class="container">
+            <a class="navbar-brand" href="/home">Home</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="/logout">Logout</a>
+                {{-- <a class="nav-link" href="{{ route('test.requests.create') }}">Create Request</a> --}}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        @yield('content')
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        © 2025 Anjedni. All rights reserved.
+    </footer>
+    <script src="{{ asset('js/script.js') }}"></script>
+
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
 </body>
 </html>

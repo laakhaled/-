@@ -41,7 +41,12 @@
     <thead class="table-dark">
       <tr>
         <th>ID</th>
+<<<<<<< HEAD
         <th>Date & Time</th>
+=======
+        <th>Date</th>
+        <th>Time</th>
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
         <th>Delete</th>
       </tr>
       </thead>
@@ -49,7 +54,12 @@
       @foreach($appointments as $appointment)
         <tr>
             <td>{{ $appointment->id }}</td>
+<<<<<<< HEAD
             <td>{{ $appointment->datetime }}</td>
+=======
+            <td>{{ $appointment->date }}</td>
+            <td>{{ $appointment->time }}</td>
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
             <td>
               <form action="/appointments/delete/{{  $appointment->id  }}" method="POST">
                 @csrf

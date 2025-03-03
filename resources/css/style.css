@@ -8,7 +8,11 @@
     background: #fff;
     border-radius: 10px;
     padding: 15px;
+<<<<<<< HEAD
     box-shadow: 0 4px 8px rgba(31, 230, 81, 0.1);
+=======
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+>>>>>>> d6f6c96 (Make dashboaed for admin and store data on offers module)
     margin-bottom: 15px;
     transition: transform 0.3s ease-in-out;
 }
